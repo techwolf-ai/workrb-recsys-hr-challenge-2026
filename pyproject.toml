@@ -1,0 +1,40 @@
+[project]
+name = "workrb-challenge-2026"
+version = "0.1.0"
+description = "Skill-extraction baseline for the WorkRB 2026 challenge."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=3.0.0",
+    "matplotlib>=3.10.9",
+    "torch>=2.2.0",
+    "transformers>=4.44.0",
+    "wandb>=0.18.0",
+    "workrb>=0.6.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/workrb_challenge"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.0.0",
+    "nbformat>=5.10.4",
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+# Run from the repo root so ``participant`` and ``workrb_challenge`` import the
+# same way they do under ``uv run python participant/...``. These tests are
+# offline smoke checks: no Hub downloads, no dataset, a few seconds total.
+testpaths = ["tests"]
+addopts = "-q"
+# Put the repo root AND ``src`` on sys.path so ``import participant.*`` and
+# ``import workrb_challenge.*`` both resolve without relying on the editable
+# install (which ``uv sync`` occasionally leaves stale). This mirrors the
+# inline path bootstrap at the top of the entry points under ``participant/``.
+pythonpath = [".", "src"]

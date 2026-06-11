@@ -1,0 +1,70 @@
+{
+  "_doc": "Toy worked example for knowledge_sharing/get_started.ipynb. All candidate skills are real ESCO labels with their canonical descriptions. The pool contains the gold answer for both queries; the trap query is engineered so a SOTA bi-encoder ranks a lexically-overlapping ESCO skill above the gold. Descriptions sourced from https://esco.ec.europa.eu/.",
+  "candidate_skills": [
+    {
+      "label": "advise customers on sewing patterns",
+      "description": "Suggest to customers the appropriate sewing patterns, in accordance to what they wish to manufacture: crafts, curtains, clothes, etc."
+    },
+    {"label": "operate sewing machines"},
+    {"label": "manage staff"},
+    {"label": "lead a team"},
+    {
+      "label": "Java (computer programming)",
+      "description": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Java."
+    },
+    {
+      "label": "Ruby (computer programming)",
+      "description": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Ruby."
+    },
+    {
+      "label": "Swift (computer programming)",
+      "description": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Swift."
+    },
+    {
+      "label": "Python (computer programming)",
+      "description": "The techniques and principles of software development, such as analysis, algorithms, coding, testing and compiling of programming paradigms in Python."
+    },
+    {"label": "JavaScript"},
+    {"label": "computer programming"},
+    {
+      "label": "debug software",
+      "description": "Repair computer code by analysing testing results, locating the defects causing the software to output an incorrect or unexpected result and removing these faults."
+    },
+    {
+      "label": "develop software prototype",
+      "description": "Create a first incomplete or preliminary version of a piece of software application to simulate some specific aspects of the final product."
+    },
+    {"label": "use scripting programming"},
+    {"label": "ICT system programming"},
+    {"label": "develop with cloud services"},
+    {"label": "automate cloud tasks"},
+    {
+      "label": "remove rust from motor vehicles",
+      "description": "Remove corrosion from surfaces of motor vehicle bodies."
+    },
+    {
+      "label": "operate rust proofing spray gun",
+      "description": "Operate a semi-automatic or handheld spray gun designed to provide the surface of a workpiece with a permanent, corrosion-protective finishing coat, safely and according to regulations."
+    },
+    {
+      "label": "troubleshoot",
+      "description": "Identify operating problems, decide what to do about it and report accordingly."
+    },
+    {"label": "perform scientific research"}
+  ],
+  "queries": [
+    {
+      "id": "happy",
+      "sentence": "the ideal candidate should be able to advise customers on sewing patterns",
+      "gold_skills": ["advise customers on sewing patterns"],
+      "comment": "The label appears in the sentence verbatim. Every retriever, including TF-IDF, should rank the gold skill at #1."
+    },
+    {
+      "id": "trap",
+      "sentence": "the engineer will refactor and debug the Rust services this quarter",
+      "gold_skills": ["debug software"],
+      "notable_distractors": ["remove rust from motor vehicles", "operate rust proofing spray gun"],
+      "comment": "The sentence is unambiguously about software (Rust the programming language is iconic, and the sentence also contains 'debug' and 'services'). But it shares the word 'rust' with two real ESCO skills about removing corrosion from cars. SOTA bi-encoders trained on lexically-leaky synthetic data fall for the surface match: both rank 'remove rust from motor vehicles' above 'debug software'."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+data/*
+!data/.gitkeep
+!data/get_started_example.json
+
+# wandb
+wandb/
+
+# pyc / caches
+*.pyc
+*/__pycache__/
+**/__pycache__/
+
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
+
+*/workrb-bundle.*
+
+# generated submission artifacts (large JSON files)
+submission/submission.json
+submission/*.json
+
+# local scratch / debugging scripts
+submission/tmp/
+tmp/
+
+#zip files
+*.zip
